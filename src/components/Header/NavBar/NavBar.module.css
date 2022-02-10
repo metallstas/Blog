@@ -1,0 +1,99 @@
+.navBar {
+  padding: 10px;
+  background-color: rgba(1, 110, 252, 1);
+  color: #fff;
+  text-align: left;
+}
+
+.navBar button {
+  border: none;
+  background: none;
+}
+
+.navBar button img {
+  width: 32px;
+}
+
+.navBar ul {
+  list-style: none;
+  text-align: left;
+}
+
+.link.activLink {
+  text-decoration: underline;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+}
+
+.container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 0 10px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.closeMenuWrap {
+  margin: 10px 0;
+}
+
+.closeMenuWrap button {
+  cursor: pointer;
+}
+
+.activeNight {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 10px;
+  border-radius: 50px;
+  transform: translateX(-100%);
+}
+
+.activeNight button {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background: rgba(1, 110, 252, 1);
+  padding: 5px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+.navBar .activeNight img {
+  width: 9px;
+}
+
+.listLinkWrap {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 35px;
+}
+
+.listLink {
+  margin-left: 100px;
+}
+
+.listLink li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listLink li:not(:last-child) {
+  margin-bottom: 20px;
+}
