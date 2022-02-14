@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import { PostCard } from './PostCard/PostCard'
 import cls from './PostList.module.css'
 
@@ -8,6 +7,7 @@ export interface IPosts {
   title: string
   image: string
   id: number
+  date: string
 }
 
 export const PostList = () => {
@@ -19,17 +19,13 @@ export const PostList = () => {
     )
     const data = await resp.json()
     setPosts(data.results)
+    console.log(data)
+
   }
 
   useEffect(() => {
     getPosts()
   }, [])
-
-  const history = useHistory()
-
-  const getInfoPost = (postId: number) => {
-    history.push('/post/' + postId)
-  }
 
   return (
     <section className={cls.postList}>
@@ -42,7 +38,7 @@ export const PostList = () => {
               text={post.text}
               title={post.title}
               image={post.image}
-              getInfoPost={() => getInfoPost(post.id)}
+              date={post.date}
             />
           ))}
         </div>

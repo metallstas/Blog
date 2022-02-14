@@ -13,17 +13,18 @@
   margin-top: 120px;
 }
 
-.login h2 span {
+.login h2 a {
   font-weight: bold;
   font-size: 45px;
   color: #75869b;
+  text-decoration: none;
 }
 
 .login h2 {
   font-size: 45px;
 }
 
-.login .spanActive {
+.login .active {
   color: #016efc;
 }
 
@@ -72,4 +73,5 @@
 
 .backImg {
   margin-top: 40px;
+  padding-bottom: 284px;
 }

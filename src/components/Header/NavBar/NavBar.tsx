@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Context } from '../../../App'
 import cls from './NavBar.module.css'
 
 interface INavBar {
@@ -7,11 +9,17 @@ interface INavBar {
 
 export const NavBar = ({ setIsActiveNavBar}: INavBar) => {
 
+  const hendleActiveNavBar = () => {
+    setIsActiveNavBar(false)
+  }
+
+  const {changeIsDark} = useContext(Context)
+
   return (
     <nav className={cls.navBar}>
       <div className={cls.container}>
         <div className={cls.closeMenuWrap}>
-          <button onClick={() => setIsActiveNavBar(false)}>
+          <button onClick={hendleActiveNavBar}>
             <img src={'/images/CloseMenu.png'} alt='close menu' />
           </button>
         </div>
@@ -23,6 +31,7 @@ export const NavBar = ({ setIsActiveNavBar}: INavBar) => {
                 activeClassName={cls.activLink}
                 exact
                 to='/'
+                onClick={hendleActiveNavBar}
               >
                 All Posts
               </NavLink>
@@ -33,6 +42,7 @@ export const NavBar = ({ setIsActiveNavBar}: INavBar) => {
                 className={cls.link}
                 exact
                 to='/login'
+                onClick={hendleActiveNavBar}
               >
                 Login
               </NavLink>
@@ -43,13 +53,14 @@ export const NavBar = ({ setIsActiveNavBar}: INavBar) => {
                 className={cls.link}
                 exact
                 to='/registration'
+                onClick={hendleActiveNavBar}
               >
                 Registration
               </NavLink>
             </li>
           </ul>
           <div className={cls.activeNight}>
-            <button>
+            <button onClick={changeIsDark}>
               <img src='/images/moon.png' alt='img' />
             </button>
           </div>

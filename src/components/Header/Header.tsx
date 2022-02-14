@@ -1,28 +1,37 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { NavBar } from './NavBar/NavBar'
 import cls from './Header.module.css'
 import { CSSTransition } from 'react-transition-group'
+import { Context } from '../../App'
 
 export const Header = () => {
   const [isActiveNavBar, setIsActiveNavBar] = useState(false)
-  
+
   const handlerNavBar = () => {
     setIsActiveNavBar(!isActiveNavBar)
   }
 
+  const { theme }: any = useContext(Context)
+  console.log(theme)
+
+  const darkTheme = {
+    background: theme.background,
+    color: theme.text
+  }
+
   return (
-    <>
-      <header className={cls.container}>
+    <header style={darkTheme}>
+      <div className={cls.container}>
         <div className={cls.header}>
-          <button onClick={handlerNavBar}>
-            <img src='/images/Menu.png' alt='menu' />
+          <button style={{background: theme.background}} onClick={handlerNavBar}>
+            <img src={theme.menuImg} alt='menu' />
           </button>
           <div className={cls.userName}>
-            <img src='/images/ico.png' alt='user' />
-            <p>Username</p>
+            <img src={theme.iconImg} alt='user' />
+            <p style={{color: theme.text}}>Username</p>
           </div>
         </div>
-      </header>
+      </div>
       <CSSTransition
         in={isActiveNavBar}
         timeout={500}
@@ -35,6 +44,6 @@ export const Header = () => {
       >
         <NavBar setIsActiveNavBar={setIsActiveNavBar} />
       </CSSTransition>
-    </>
+    </header>
   )
 }
