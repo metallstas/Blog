@@ -1,7 +1,7 @@
 .postCard {
   position: relative;
   width: 340px;
-  margin-right: 10px;
+  margin-right: 20px;
   margin-bottom: 10px;
   padding: 28px 22px;
   border: 1px solid #c6ddff;
@@ -34,6 +34,11 @@
   line-height: 19px;
   color: #979797;
   margin-bottom: 20px;
+ 	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
 }
 
 .postCard .postDate {

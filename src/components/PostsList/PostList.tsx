@@ -12,20 +12,26 @@ export interface IPosts {
 
 export const PostList = () => {
   const [posts, setPosts] = useState([])
+  const [limit, setLimit] = useState(6)
 
   const getPosts = async () => {
     const resp = await fetch(
-      'https://studapi.teachmeskills.by/blog/posts/?limit=100'
+      `https://studapi.teachmeskills.by/blog/posts/?limit=${limit}`
     )
     const data = await resp.json()
     setPosts(data.results)
-    console.log(data)
+  }
 
+  const handleLimitPost = () => {
+    if(limit > posts.length) {
+      return 
+    }
+    setLimit((limit) => limit + 6)
   }
 
   useEffect(() => {
     getPosts()
-  }, [])
+  }, [limit])
 
   return (
     <section className={cls.postList}>
@@ -41,6 +47,15 @@ export const PostList = () => {
               date={post.date}
             />
           ))}
+        </div>
+        <div className={cls.showMoreBlock}>
+          {limit > posts.length ? (
+            null
+          ) : (
+            <button className={cls.showMore} onClick={handleLimitPost}>
+              Show more
+            </button>
+          )}
         </div>
       </div>
     </section>

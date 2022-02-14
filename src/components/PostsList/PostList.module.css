@@ -14,3 +14,22 @@
   font-family: 'Raleway', sans-serif;
   margin:0 auto;
 }
+
+.showMoreBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.showMore {
+  width: 370px;
+  background: #007bff;
+  border: 4px solid #0077f7;
+  border-radius: 200px;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  color: #fff;
+  padding: 18px;
+  margin: 20px 0;
+  cursor: pointer;
+}

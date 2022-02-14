@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Context } from '../../../App'
+import { Context, IContext } from '../../../App'
 import { Button } from '../../Button/Button'
 import { Input } from '../../Input/Input'
 import cls from './FormLogin.module.css'
@@ -8,7 +8,7 @@ import cls from './FormLogin.module.css'
 export const FormLogin = () => {
   const [checkName, setCheckName] = useState('')
   const [checkPassword, setCheckPassword] = useState('')
-  const { theme }: any = useContext(Context)
+  const { theme }: IContext = useContext(Context)
 
   const onChangeName = (text: string) => {
     setCheckName(text)
@@ -20,7 +20,7 @@ export const FormLogin = () => {
 
   return (
     <section
-      style={{ background: theme.background, color: theme.text }}
+      style={{ background: theme.background }}
       className={cls.login}
     >
       <div className={cls.container}>
@@ -35,7 +35,7 @@ export const FormLogin = () => {
             </NavLink>
           </h2>
         </div>
-        <form style={{color: theme.text}} className={cls.form}>
+        <form className={cls.form}>
           <Input
             type={'email'}
             id={'email'}
@@ -51,8 +51,8 @@ export const FormLogin = () => {
           <Button text={'Login'} />
         </form>
         <div className={cls.resetPassword}>
-          <p>Forgot your password?</p>
-          <button>Reset password</button>
+          <p style={{color: theme.greyText}}>Forgot your password?</p>
+          <button style={{color: theme.text}}>Reset password</button>
         </div>
         <div className={cls.backImg}>
           <img src={theme.bgImage} alt='img' />

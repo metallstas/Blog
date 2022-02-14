@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { NavBar } from './NavBar/NavBar'
 import cls from './Header.module.css'
 import { CSSTransition } from 'react-transition-group'
-import { Context } from '../../App'
+import { Context, IContext } from '../../App'
 
 export const Header = () => {
   const [isActiveNavBar, setIsActiveNavBar] = useState(false)
@@ -11,8 +11,7 @@ export const Header = () => {
     setIsActiveNavBar(!isActiveNavBar)
   }
 
-  const { theme }: any = useContext(Context)
-  console.log(theme)
+  const { theme }: IContext = useContext(Context)
 
   const darkTheme = {
     background: theme.background,

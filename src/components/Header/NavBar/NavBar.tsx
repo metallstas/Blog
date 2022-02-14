@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Context } from '../../../App'
+import { Context, IContext } from '../../../App'
 import cls from './NavBar.module.css'
 
 interface INavBar {
@@ -13,7 +13,7 @@ export const NavBar = ({ setIsActiveNavBar}: INavBar) => {
     setIsActiveNavBar(false)
   }
 
-  const {changeIsDark} = useContext(Context)
+  const {changeIsDark, isDark}: IContext = useContext(Context)
 
   return (
     <nav className={cls.navBar}>
@@ -59,7 +59,7 @@ export const NavBar = ({ setIsActiveNavBar}: INavBar) => {
               </NavLink>
             </li>
           </ul>
-          <div className={cls.activeNight}>
+          <div className={isDark ? `${cls.activeNight} ${cls.rigth}`: `${cls.activeNight}`}>
             <button onClick={changeIsDark}>
               <img src='/images/moon.png' alt='img' />
             </button>

@@ -1,5 +1,6 @@
-import { ChangeEvent, useState } from 'react'
+import { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Context, IContext } from '../../../App'
 import { Button } from '../../Button/Button'
 import { Input } from '../../Input/Input'
 import cls from './FormRegister.module.css'
@@ -9,6 +10,7 @@ export const FormRegister = () => {
   const [checkEmail, setCheckEmail] = useState('')
   const [checkPassword, setCheckPassword] = useState('')
   const [checkRepeatPassword, setCheckRepeatPassword] = useState('')
+  const {theme}: IContext = useContext(Context)
 
   const onChangeName = (text: string) => {
     setCheckName(text)
@@ -24,7 +26,7 @@ export const FormRegister = () => {
   }
 
   return (
-    <section className={cls.login}>
+    <section style={{ background: theme.background }}className={cls.login}>
       <div className={cls.container}>
         <div>
           <h2>
@@ -32,7 +34,7 @@ export const FormRegister = () => {
               Login
             </NavLink>{' '}
             |{' '}
-            <NavLink to='/registration' exact className={cls.active}>
+            <NavLink style={{color: theme.text}}to='/registration' exact className={cls.active}>
               Registration
             </NavLink>
           </h2>
@@ -65,11 +67,11 @@ export const FormRegister = () => {
           <Button text={'Login'} />
         </form>
         <div className={cls.resetPassword}>
-          <p>If you have account, you can </p>
-          <button>Login</button>
+          <p style={{color: theme.greyText}}>If you have account, you can </p>
+          <button style={{color: theme.text}}>Login</button>
         </div>
         <div className={cls.backImg}>
-          <img src='./images/bg-light.png' alt='img' />
+          <img src={theme.bgImage} alt='img' />
         </div>
       </div>
     </section>
