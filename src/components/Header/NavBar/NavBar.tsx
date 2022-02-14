@@ -13,6 +13,11 @@ export const NavBar = ({ setIsActiveNavBar}: INavBar) => {
     setIsActiveNavBar(false)
   }
 
+  const changeTheme = () => {
+    changeIsDark()
+    setIsActiveNavBar(false) 
+  }
+
   const {changeIsDark, isDark}: IContext = useContext(Context)
 
   return (
@@ -60,7 +65,7 @@ export const NavBar = ({ setIsActiveNavBar}: INavBar) => {
             </li>
           </ul>
           <div className={isDark ? `${cls.activeNight} ${cls.rigth}`: `${cls.activeNight}`}>
-            <button onClick={changeIsDark}>
+            <button onClick={changeTheme}>
               <img src='/images/moon.png' alt='img' />
             </button>
           </div>

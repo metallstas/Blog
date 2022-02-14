@@ -73,7 +73,7 @@
   height: 20px;
   cursor: pointer;
   left: 7px;
-  transition: left .5s;
+  transition: left .3s;
 }
 
 .rigth button {

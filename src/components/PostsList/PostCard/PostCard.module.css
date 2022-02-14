@@ -1,7 +1,7 @@
 .postCard {
   position: relative;
   width: 340px;
-  margin-right: 20px;
+  margin: 0 10px;
   margin-bottom: 10px;
   padding: 28px 22px;
   border: 1px solid #c6ddff;

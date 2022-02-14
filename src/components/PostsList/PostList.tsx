@@ -10,32 +10,37 @@ export interface IPosts {
   date: string
 }
 
+const DATA_LOADING_STEP = 9
+
 export const PostList = () => {
   const [posts, setPosts] = useState([])
-  const [limit, setLimit] = useState(6)
+  const [offset, setOffset] = useState(0)
 
   const getPosts = async () => {
     const resp = await fetch(
-      `https://studapi.teachmeskills.by/blog/posts/?limit=${limit}`
+      `https://studapi.teachmeskills.by/blog/posts/?limit=${DATA_LOADING_STEP}&offset=${offset}`
     )
     const data = await resp.json()
-    setPosts(data.results)
+    const postData: [] = await data.results
+    setPosts(posts => [...posts, ...postData])
   }
 
   const handleLimitPost = () => {
-    if(limit > posts.length) {
-      return 
-    }
-    setLimit((limit) => limit + 6)
+    setOffset((offset) => offset + DATA_LOADING_STEP)
   }
 
   useEffect(() => {
     getPosts()
-  }, [limit])
+  }, [offset])
 
   return (
     <section className={cls.postList}>
       <div className={cls.container}>
+        <div className={cls.addPostsBlock}>
+          <h2 className={cls.allPosts}>All Posts</h2>
+          <button>+ Add</button>
+        </div>
+        
         <div className={cls.postListItem}>
           {posts.map((post: IPosts) => (
             <PostCard
@@ -49,7 +54,7 @@ export const PostList = () => {
           ))}
         </div>
         <div className={cls.showMoreBlock}>
-          {limit > posts.length ? (
+          {offset + DATA_LOADING_STEP > posts.length ? (
             null
           ) : (
             <button className={cls.showMore} onClick={handleLimitPost}>

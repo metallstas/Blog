@@ -7,6 +7,11 @@
   flex-wrap: wrap;
 }
 
+.addPostsBlock {
+  display: flex;
+  align-items: center;
+}
+
 .container {
   max-width: 1100px;
   width: 100%;
@@ -32,4 +37,24 @@
   padding: 18px;
   margin: 20px 0;
   cursor: pointer;
+}
+
+.allPosts {
+  margin: 45px 0;
+  font-weight: bold;
+  font-size: 45px;
+  color: #016efc;
+}
+
+.addPostsBlock button {
+  background: #007bff;
+  border: 4px solid #0077f7;
+  border-radius: 200px;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  color: #fff;
+  padding: 10px;
+  margin-left: 30px;
+  width: 120px;
 }
