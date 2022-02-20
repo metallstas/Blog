@@ -1,0 +1,58 @@
+.container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0px auto;
+  padding: 20px 10px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.headerSection {
+  background-color: #fff;
+}
+
+.header {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.header button {
+  border: none;
+  background: #fff;
+  cursor: pointer;
+}
+
+.userName {
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+}
+
+.userName img {
+  width: 21px;
+}
+
+.userName p {
+  color: #016efc;
+  margin-left: 15px;
+}
+
+.navBarEnter {
+  animation: showNavBar 0.5s ease-in 0s 1 normal;
+}
+.navBarExit {
+  animation: showNavBar 0.5s ease-in-out 0s 1 reverse;
+}
+
+@keyframes showNavBar {
+  from {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+  to {
+    max-height: 500px;
+    overflow: auto;
+    padding: 10px;
+  }
+}

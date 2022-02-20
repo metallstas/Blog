@@ -1,0 +1,63 @@
+.container {
+  max-width: 1100px;
+  width: 100%;
+  padding: 10px;
+  font-family: 'Raleway', sans-serif;
+  margin: 0 auto;
+}
+
+.post {
+  background-color: #e5e5e5;
+  padding-bottom: 70px;
+  min-height: 100vh;
+}
+
+.selectedPost {
+  margin: 45px 0;
+  font-weight: bold;
+  font-size: 45px;
+  color: #016efc;
+}
+
+.postCard {
+  position: relative;
+  width: 675px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 28px 22px;
+  border: 1px solid #c6ddff;
+  background-color: #fff;
+  box-shadow: 0px 6px 50px rgba(184, 196, 209, 0.15);
+  border-radius: 13px;
+}
+
+.postCard img {
+  width: 620px;
+  border-radius: 11px;
+}
+
+.postText {
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.postText h2 {
+  font-weight: 600;
+  color: #4f4f4f;
+  font-size: 20px;
+  line-height: 23px;
+  margin: 25px 0 10px 0;
+}
+
+.postText p {
+  font-weight: normal;
+  line-height: 19px;
+  color: #979797;
+  margin-bottom: 13px;
+}
+
+.postCard .postDate {
+  font-weight: normal;
+  line-height: 19px;
+  color: #016efc;
+}
