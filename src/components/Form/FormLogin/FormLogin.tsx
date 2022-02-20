@@ -1,22 +1,12 @@
-import { useContext, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Context, IContext } from '../../../App'
+import { IState } from '../../../redux/store'
 import { Button } from '../../Button/Button'
 import { Input } from '../../Input/Input'
 import cls from './FormLogin.module.css'
 
 export const FormLogin = () => {
-  const [checkName, setCheckName] = useState('')
-  const [checkPassword, setCheckPassword] = useState('')
-  const { theme }: IContext = useContext(Context)
-
-  const onChangeName = (text: string) => {
-    setCheckName(text)
-  }
-
-  const onChangePassword = (text: string) => {
-    setCheckPassword(text)
-  }
+  const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
 
   return (
     <section
@@ -40,13 +30,13 @@ export const FormLogin = () => {
             type={'email'}
             id={'email'}
             text={'Email'}
-            onChange={onChangeName}
+            onChange={() => {}}
           />
           <Input
             type={'password'}
             id={'password'}
             text={'Password'}
-            onChange={onChangePassword}
+            onChange={() => {}}
           />
           <Button text={'Login'} />
         </form>

@@ -1,24 +1,24 @@
-import { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Context, IContext } from '../../../App'
+import { setIsActiveNavBar } from '../../../redux/actions/headerAction'
+import { changeIsDark } from '../../../redux/actions/themeAction'
+import { IState } from '../../../redux/store'
 import cls from './NavBar.module.css'
 
-interface INavBar {
-  setIsActiveNavBar: (active: boolean) => void
-}
 
-export const NavBar = ({ setIsActiveNavBar}: INavBar) => {
+export const NavBar = () => {
+
+  const isDark = useSelector((state: IState) => state.themeReducer.isDark)
+  const dispatch = useDispatch()
 
   const hendleActiveNavBar = () => {
-    setIsActiveNavBar(false)
+    dispatch(setIsActiveNavBar(false))
   }
 
   const changeTheme = () => {
-    changeIsDark()
-    setIsActiveNavBar(false) 
+    dispatch(changeIsDark())
+    dispatch(setIsActiveNavBar(false)) 
   }
-
-  const {changeIsDark, isDark}: IContext = useContext(Context)
 
   return (
     <nav className={cls.navBar}>

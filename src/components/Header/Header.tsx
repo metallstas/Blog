@@ -1,17 +1,18 @@
-import { useContext, useState } from 'react'
 import { NavBar } from './NavBar/NavBar'
 import cls from './Header.module.css'
 import { CSSTransition } from 'react-transition-group'
-import { Context, IContext } from '../../App'
+import { useDispatch, useSelector } from 'react-redux'
+import { IState } from '../../redux/store'
+import { setIsActiveNavBar } from '../../redux/actions/headerAction'
 
 export const Header = () => {
-  const [isActiveNavBar, setIsActiveNavBar] = useState(false)
-
+  const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
+  const isActiveNavBar = useSelector((state: IState) => state.headerReducer.isActiveNavBar)
+  const dispatch = useDispatch()
+  
   const handlerNavBar = () => {
-    setIsActiveNavBar(!isActiveNavBar)
+    dispatch(setIsActiveNavBar(true))
   }
-
-  const { theme }: IContext = useContext(Context)
 
   const darkTheme = {
     background: theme.background,
@@ -41,7 +42,7 @@ export const Header = () => {
           exitActive: cls.navBarExit,
         }}
       >
-        <NavBar setIsActiveNavBar={setIsActiveNavBar} />
+        <NavBar />
       </CSSTransition>
     </header>
   )

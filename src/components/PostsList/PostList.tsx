@@ -1,37 +1,41 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { IPost } from '../../redux/reducers/postsReducer'
 import { PostCard } from './PostCard/PostCard'
 import cls from './PostList.module.css'
-
-export interface IPosts {
-  text: string
-  title: string
-  image: string
-  id: number
-  date: string
-}
+import { IState } from '../../redux/store'
+import {
+  addPosts,
+  clearState,
+  setOffset,
+} from '../../redux/actions/postsAction'
 
 const DATA_LOADING_STEP = 9
 
 export const PostList = () => {
-  const [posts, setPosts] = useState([])
-  const [offset, setOffset] = useState(0)
+  const offset = useSelector((state: IState) => state.postsReducer.offset)
+  const posts = useSelector((state: IState) => state.postsReducer.posts)
 
-  const getPosts = async () => {
+  useEffect(() => {
+    dispatch(clearState())
+    getPosts(0)
+  }, [])
+
+  const dispatch = useDispatch()
+
+  const getPosts = async (offset: number) => {
     const resp = await fetch(
       `https://studapi.teachmeskills.by/blog/posts/?limit=${DATA_LOADING_STEP}&offset=${offset}`
     )
     const data = await resp.json()
-    const postData: [] = await data.results
-    setPosts(posts => [...posts, ...postData])
+    const postsData = await data.results
+    dispatch(addPosts(postsData))
   }
 
-  const handleLimitPost = () => {
-    setOffset((offset) => offset + DATA_LOADING_STEP)
+  const handleLimitPosts = () => {
+    dispatch(setOffset(DATA_LOADING_STEP))
+    getPosts(offset + DATA_LOADING_STEP)
   }
-
-  useEffect(() => {
-    getPosts()
-  }, [offset])
 
   return (
     <section className={cls.postList}>
@@ -40,9 +44,9 @@ export const PostList = () => {
           <h2 className={cls.allPosts}>All Posts</h2>
           <button>+ Add</button>
         </div>
-        
+
         <div className={cls.postListItem}>
-          {posts.map((post: IPosts) => (
+          {posts.map((post: IPost) => (
             <PostCard
               key={post.id}
               id={post.id}
@@ -54,10 +58,8 @@ export const PostList = () => {
           ))}
         </div>
         <div className={cls.showMoreBlock}>
-          {offset + DATA_LOADING_STEP > posts.length ? (
-            null
-          ) : (
-            <button className={cls.showMore} onClick={handleLimitPost}>
+          {offset + DATA_LOADING_STEP > posts.length ? null : (
+            <button className={cls.showMore} onClick={handleLimitPosts}>
               Show more
             </button>
           )}

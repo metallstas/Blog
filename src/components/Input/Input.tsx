@@ -1,5 +1,5 @@
-import { useContext } from 'react'
-import { Context, IContext } from '../../App'
+import { useSelector } from 'react-redux'
+import { IState } from '../../redux/store'
 import cls from './Input.module.css'
 
 interface IInput {
@@ -11,8 +11,7 @@ interface IInput {
 
 export const Input = ({id, type, text,onChange}: IInput) => {
  
-  const {theme}: IContext = useContext(Context)
-
+  const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
   return (
     <>
       <label style={{color: theme.greyText}} htmlFor={id}>{text}</label>

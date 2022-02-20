@@ -1,29 +1,13 @@
-import { useContext, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Context, IContext } from '../../../App'
+import { IState } from '../../../redux/store'
 import { Button } from '../../Button/Button'
 import { Input } from '../../Input/Input'
 import cls from './FormRegister.module.css'
 
 export const FormRegister = () => {
-  const [checkName, setCheckName] = useState('')
-  const [checkEmail, setCheckEmail] = useState('')
-  const [checkPassword, setCheckPassword] = useState('')
-  const [checkRepeatPassword, setCheckRepeatPassword] = useState('')
-  const {theme}: IContext = useContext(Context)
 
-  const onChangeName = (text: string) => {
-    setCheckName(text)
-  }
-  const onChangeEmail = (text: string) => {
-    setCheckEmail(text)
-  }
-  const onChangePassword = (text: string) => {
-    setCheckPassword(text)
-  }
-  const onChangeRepeatPassword = (text: string) => {
-    setCheckRepeatPassword(text)
-  }
+  const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
 
   return (
     <section style={{ background: theme.background }}className={cls.login}>
@@ -44,25 +28,25 @@ export const FormRegister = () => {
             type={'text'}
             id={'name'}
             text={'Name'}
-            onChange={onChangeName}
+            onChange={() => {}}
           />
           <Input
             type={'email'}
             id={'email'}
             text={'Email'}
-            onChange={onChangeEmail}
+            onChange={() => {}}
           />
           <Input
             type={'password'}
             id={'password'}
             text={'Password'}
-            onChange={onChangePassword}
+            onChange={() => {}}
           />
           <Input
             type={'password'}
             id={'confirm-password'}
             text={'Confirm Password'}
-            onChange={onChangeRepeatPassword}
+            onChange={() => {}}
           />
           <Button text={'Login'} />
         </form>
