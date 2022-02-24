@@ -11,7 +11,7 @@ export const Header = () => {
   const dispatch = useDispatch()
   
   const handlerNavBar = () => {
-    dispatch(setIsActiveNavBar(true))
+    dispatch(setIsActiveNavBar(!isActiveNavBar))
   }
 
   const darkTheme = {

@@ -4,6 +4,7 @@ import { Header } from '../components/Header/Header'
 import { FormLogin } from '../components/Form/FormLogin/FormLogin'
 import { FormRegister } from '../components/Form/FormRegister/FormRegister'
 import { Post } from '../components/PostsList/Post/Post'
+import { AddPost } from '../components/AddPost/AddPost'
 
 export const RootRouter = () => {
   return (
@@ -19,8 +20,11 @@ export const RootRouter = () => {
         <Route path='/registration' exact>
           <FormRegister />
         </Route>
-        <Route path='/post/:postId'>
+        <Route path='/post/:postId' exact>
           <Post />
+        </Route>
+        <Route path='/add-post' exact>
+          <AddPost />
         </Route>
       </Switch>
     </BrowserRouter>

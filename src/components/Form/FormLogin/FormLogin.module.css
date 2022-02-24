@@ -41,13 +41,12 @@
   margin-top: 100px;
 }
 
-.form label {
+/* .form label {
   margin-bottom: 14px;
   font-weight: 500;
   font-size: 25px;
   line-height: 29px;
-  /* color: #254050; */
-}
+} */
 
 .form input {
   margin-bottom: 40px;

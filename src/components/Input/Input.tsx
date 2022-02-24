@@ -14,7 +14,7 @@ export const Input = ({id, type, text,onChange}: IInput) => {
   const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
   return (
     <>
-      <label style={{color: theme.greyText}} htmlFor={id}>{text}</label>
+      <label className={cls.label} style={{color: theme.greyText}} htmlFor={id}>{text}</label>
       <input id={id} type={type} className={cls.input} onChange={e => onChange(e.target.value)}/>
     </>
   )

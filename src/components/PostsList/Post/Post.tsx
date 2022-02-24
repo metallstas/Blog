@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import cls from './Post.module.css'
 import { IState } from '../../../redux/store'
-import { postCurrent } from '../../../redux/actions/postsAction'
+import { fetchPost } from '../../../redux/actions/postsAction'
 
 export const Post = () => {
   const post = useSelector((state: IState) => state.postsReducer.post)
@@ -11,16 +11,8 @@ export const Post = () => {
   const params: {postId: string} = useParams()
 
   useEffect(() => {
-    getPostInfo()
+    dispatch(fetchPost(params.postId))
   }, [])
-
-  const getPostInfo = async () => {
-    const resp = await fetch(
-      'https://studapi.teachmeskills.by/blog/posts/' + params.postId
-    )
-    const post = await resp.json()
-    dispatch(postCurrent(post))
-  }
 
   return (
     <section className={cls.post}>
