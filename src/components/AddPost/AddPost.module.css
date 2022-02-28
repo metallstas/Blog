@@ -67,9 +67,14 @@ textarea {
   margin-right: 100px;
 }
 
+.infoPost label:not(:first-child) {
+  margin-top: 40px;
+}
+
 .textareaLabel {
   font-size: 25px;
   margin-bottom: 15px;
+  margin-top: 40px;
 }
 
 .imgPost {
@@ -105,7 +110,6 @@ textarea {
 }
 
 .imgPostTitile {
-  /* margin-top: 28px; */
   margin-bottom: 10px;
   font-size: 25px;
 }

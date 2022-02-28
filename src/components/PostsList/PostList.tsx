@@ -1,9 +1,9 @@
-import { KeyboardEvent, useEffect, useState } from 'react'
+import { KeyboardEvent, useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IPost } from '../../redux/reducers/postsReducer'
 import { PostCard } from './PostCard/PostCard'
 import cls from './PostList.module.css'
-import { IState } from '../../redux/store'
+import { IState, store } from '../../redux/store'
 import {
   clearState,
   fetchPosts,
@@ -14,8 +14,29 @@ import { NavLink } from 'react-router-dom'
 
 export const DATA_LOADING_STEP = 9
 
+function debounce(fun: (text: string) => void, ms: number) {
+  let isCooldown = false
+
+  return function (searchText: string) {
+    if (isCooldown) {
+      return
+    }
+
+    fun(searchText)
+    isCooldown = true
+    setTimeout(() => {
+      isCooldown = false
+    }, ms)
+  }
+}
+
+const delayedSearch = debounce(
+  (text: string) => store.dispatch(searchPosts(text)),
+  1000
+)
+
 export const PostList = () => {
-  const [showButton, setShowButton] = useState(false)
+  const [showButton, setShowButton] = useState<boolean>(false)
   const offset = useSelector((state: IState) => state.postsReducer.offset)
   const posts = useSelector((state: IState) => state.postsReducer.posts)
   const textSearchPosts = useSelector(
@@ -33,23 +54,23 @@ export const PostList = () => {
     dispatch(fetchPosts(offset))
   }
 
-  const handleSearchPosts = (text: string) => {
-    dispatch(searchPostsText(text))
-  }
+  const handleSearchPosts = useCallback(
+    (text: string) => {
+      setShowButton(true)
+      dispatch(searchPostsText(text))
+      delayedSearch(text)
+    },
+    [textSearchPosts]
+  )
 
-  const handleKey = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      if (textSearchPosts) {
-        setShowButton(true)
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
         dispatch(searchPosts(textSearchPosts))
-        dispatch(clearState())
-        return
       }
-      dispatch(clearState())
-      dispatch(fetchPosts())
-      setShowButton(false)
-    }
-  }
+    },
+    [textSearchPosts]
+  )
 
   return (
     <section className={cls.postList}>
@@ -61,11 +82,14 @@ export const PostList = () => {
               onClick={() => {
                 dispatch(clearState())
                 dispatch(fetchPosts())
+                setShowButton(false)
               }}
             >
               All Posts
             </h2>
-            <NavLink to='/add-post' exact>+ Add</NavLink>
+            <NavLink to='/add-post' exact>
+              + Add
+            </NavLink>
           </div>
           <div className={cls.searchPosts}>
             <label htmlFor='search'>Search</label>
@@ -74,7 +98,7 @@ export const PostList = () => {
               id='search'
               type='text'
               onChange={(e) => handleSearchPosts(e.target.value)}
-              onKeyDown={(e) => handleKey(e)}
+              onKeyDown={(e) => handleKeyDown(e)}
             />
           </div>
         </div>
@@ -95,7 +119,7 @@ export const PostList = () => {
           )}
         </div>
         <div className={cls.showMoreBlock}>
-          {offset > posts.length || showButton ? null : (
+          {(offset !== posts.length) || showButton ? null : (
             <button className={cls.showMore} onClick={handleLimitPosts}>
               Show more
             </button>

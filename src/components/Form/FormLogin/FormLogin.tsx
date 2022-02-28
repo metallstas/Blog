@@ -7,16 +7,25 @@ import cls from './FormLogin.module.css'
 
 export const FormLogin = () => {
   const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
+  const a = async () => {
+    const resp = await fetch(`https://fakestoreapi.com/products`)
+    const data = await resp.json()
+    console.log(data)
+  }
+
+  a()
 
   return (
-    <section
-      style={{ background: theme.background }}
-      className={cls.login}
-    >
+    <section style={{ background: theme.background }} className={cls.login}>
       <div className={cls.container}>
         <div>
           <h2>
-            <NavLink style={{color: theme.text}} to='/login' exact className={cls.active}>
+            <NavLink
+              style={{ color: theme.text }}
+              to='/login'
+              exact
+              className={cls.active}
+            >
               Login
             </NavLink>{' '}
             |{' '}
@@ -38,11 +47,13 @@ export const FormLogin = () => {
             text={'Password'}
             onChange={() => {}}
           />
-          <Button text={'Login'} />
+          <div className={cls.btnLogin}>
+            <Button text={'Login'} />
+          </div>
         </form>
         <div className={cls.resetPassword}>
-          <p style={{color: theme.greyText}}>Forgot your password?</p>
-          <button style={{color: theme.text}}>Reset password</button>
+          <p style={{ color: theme.greyText }}>Forgot your password?</p>
+          <button style={{ color: theme.text }}>Reset password</button>
         </div>
         <div className={cls.backImg}>
           <img src={theme.bgImage} alt='img' />

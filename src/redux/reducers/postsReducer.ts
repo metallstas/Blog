@@ -36,10 +36,6 @@ export const postsReducer = (state = defaultState, action: any) => {
     }
   }
 
-  // if (action.type === ACTIONS.SET_OFFSET) {
-  //   return { ...state, offset: state.offset + action.step }
-  // }
-
   if (action.type === ACTIONS.CLEAR_STATE) {
     return { ...defaultState }
   }
