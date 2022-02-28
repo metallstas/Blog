@@ -74,7 +74,6 @@ export const PostList = () => {
 
   return (
     <section className={cls.postList}>
-import React from 'react';
       <div className={cls.container}>
         <div className={cls.addPostsWrap}>
           <div className={cls.addPostBlock}>
