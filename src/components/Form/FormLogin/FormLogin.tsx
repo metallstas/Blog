@@ -7,13 +7,6 @@ import cls from './FormLogin.module.css'
 
 export const FormLogin = () => {
   const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
-  const a = async () => {
-    const resp = await fetch(`https://fakestoreapi.com/products`)
-    const data = await resp.json()
-    console.log(data)
-  }
-
-  a()
 
   return (
     <section style={{ background: theme.background }} className={cls.login}>

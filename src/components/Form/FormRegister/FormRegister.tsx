@@ -57,8 +57,8 @@ export const FormRegister = () => {
           <h2>
             <NavLink to='/login' exact>
               Login
-            </NavLink>{' '}
-            |{' '}
+            </NavLink>
+            |
             <NavLink
               style={{ color: theme.text }}
               to='/registration'

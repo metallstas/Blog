@@ -11,7 +11,6 @@ interface IInput {
 }
 
 export const Input = ({id, type, text,onChange, error}: IInput) => {
- 
   const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
   return (
     <>
