@@ -42,15 +42,7 @@
 }
 
 .form label {
-  margin-bottom: 14px;
-  font-weight: 500;
-  font-size: 25px;
-  line-height: 29px;
-  /* color: #254050; */
-}
-
-.form input {
-  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 .resetPassword {
@@ -76,4 +68,8 @@
 .backImg {
   margin-top: 40px;
   padding-bottom: 284px;
+}
+
+.btnLogin {
+  margin-top: 60px;
 }

@@ -1,28 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { IPosts } from '../PostList'
 import cls from './Post.module.css'
-
-interface IPost extends IPosts {
-  date: string
-}
+import { IState } from '../../../redux/store'
+import { fetchPost } from '../../../redux/actions/postsAction'
 
 export const Post = () => {
-  const [post, setPost] = useState<IPost>(Object)
-
-  const params: any = useParams()
+  const post = useSelector((state: IState) => state.postsReducer.post)
+  const dispatch = useDispatch()
+  const params: {postId: string} = useParams()
 
   useEffect(() => {
-    getPostInfo()
+    dispatch(fetchPost(params.postId))
   }, [])
-
-  const getPostInfo = async () => {
-    const resp = await fetch(
-      'https://studapi.teachmeskills.by/blog/posts/' + params.postId
-    )
-    const post = await resp.json()
-    setPost(post)
-  }
 
   return (
     <section className={cls.post}>

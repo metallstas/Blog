@@ -1,32 +1,24 @@
-import { useContext, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Context, IContext } from '../../../App'
+import { IState } from '../../../redux/store'
 import { Button } from '../../Button/Button'
 import { Input } from '../../Input/Input'
 import cls from './FormLogin.module.css'
 
 export const FormLogin = () => {
-  const [checkName, setCheckName] = useState('')
-  const [checkPassword, setCheckPassword] = useState('')
-  const { theme }: IContext = useContext(Context)
-
-  const onChangeName = (text: string) => {
-    setCheckName(text)
-  }
-
-  const onChangePassword = (text: string) => {
-    setCheckPassword(text)
-  }
+  const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
 
   return (
-    <section
-      style={{ background: theme.background }}
-      className={cls.login}
-    >
+    <section style={{ background: theme.background }} className={cls.login}>
       <div className={cls.container}>
         <div>
           <h2>
-            <NavLink style={{color: theme.text}} to='/login' exact className={cls.active}>
+            <NavLink
+              style={{ color: theme.text }}
+              to='/login'
+              exact
+              className={cls.active}
+            >
               Login
             </NavLink>{' '}
             |{' '}
@@ -40,19 +32,21 @@ export const FormLogin = () => {
             type={'email'}
             id={'email'}
             text={'Email'}
-            onChange={onChangeName}
+            onChange={() => {}}
           />
           <Input
             type={'password'}
             id={'password'}
             text={'Password'}
-            onChange={onChangePassword}
+            onChange={() => {}}
           />
-          <Button text={'Login'} />
+          <div className={cls.btnLogin}>
+            <Button text={'Login'} />
+          </div>
         </form>
         <div className={cls.resetPassword}>
-          <p style={{color: theme.greyText}}>Forgot your password?</p>
-          <button style={{color: theme.text}}>Reset password</button>
+          <p style={{ color: theme.greyText }}>Forgot your password?</p>
+          <button style={{ color: theme.text }}>Reset password</button>
         </div>
         <div className={cls.backImg}>
           <img src={theme.bgImage} alt='img' />
