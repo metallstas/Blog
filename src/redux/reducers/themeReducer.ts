@@ -39,6 +39,7 @@ const defaultState: IThemeState = {
 
 export const themeReducer = (state = defaultState, action: any) => {
   if (action.type === ACTIONS.CHANGE_IS_DARK) {
+    
     return {isDark: !state.isDark, currentTheme: !state.isDark ? themeDark : themeLight }
   }
 

@@ -15,19 +15,27 @@ import { NavLink } from 'react-router-dom'
 export const DATA_LOADING_STEP = 9
 
 function debounce(fun: (text: string) => void, ms: number) {
-  let isCooldown = false
+  let isCooldown = false;
+  let prevSearchText = "";
 
   return function (searchText: string) {
+    prevSearchText = searchText;
+
     if (isCooldown) {
-      return
+      return;
     }
 
-    fun(searchText)
-    isCooldown = true
+    fun(searchText);
+    isCooldown = true;
+
     setTimeout(() => {
-      isCooldown = false
-    }, ms)
-  }
+      isCooldown = false;
+
+      if (prevSearchText !== searchText) {
+        fun(prevSearchText);
+      }
+    }, ms);
+  };
 }
 
 const delayedSearch = debounce(

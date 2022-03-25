@@ -9,6 +9,7 @@ export const Header = () => {
   const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
   const isActiveNavBar = useSelector((state: IState) => state.headerReducer.isActiveNavBar)
   const dispatch = useDispatch()
+  const {isLoggedIn, username} = useSelector((state: IState) => state.authReducer)
   
   const handlerNavBar = () => {
     dispatch(setIsActiveNavBar(!isActiveNavBar))
@@ -28,7 +29,7 @@ export const Header = () => {
           </button>
           <div className={cls.userName}>
             <img src={theme.iconImg} alt='user' />
-            <p style={{color: theme.text}}>Username</p>
+            <p style={{color: theme.text}}>{isLoggedIn ? username : 'Username'}</p>
           </div>
         </div>
       </div>

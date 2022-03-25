@@ -1,6 +1,7 @@
-import { useCallback, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useHistory } from 'react-router-dom'
+import { register } from '../../../redux/actions/authAction'
 import { IState } from '../../../redux/store'
 import { validationService } from '../../../services/validation'
 import { Button } from '../../Button/Button'
@@ -9,10 +10,14 @@ import cls from './FormRegister.module.css'
 
 export const FormRegister = () => {
   const theme = useSelector((state: IState) => state.themeReducer.currentTheme)
-  const [userName, setUserName] = useState<string>('')
+  const [username, setUsername] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
+  const dispatch = useDispatch()
+  const error = useSelector((state: IState) => state.authReducer.error)
+  const emailState = useSelector((state: IState) => state.authReducer.email)
+  const history = useHistory()
 
   const [errors, setErrors] = useState({
     username: '',
@@ -21,8 +26,14 @@ export const FormRegister = () => {
     confirmPassword: '',
   })
 
+  useEffect(() => {
+    if (emailState) {
+      history.push('/confirm')
+    }
+  }, [emailState])
+
   const onChangeUserName = useCallback((text) => {
-    setUserName(text)
+    setUsername(text)
   }, [])
 
   const onChangeEmail = useCallback((text) => {
@@ -39,7 +50,7 @@ export const FormRegister = () => {
 
   const onClick = () => {
     const errors = {
-      username: validationService.validateName(userName),
+      username: validationService.validateName(username),
       email: validationService.validateEmail(email),
       password: validationService.validatePassword(password),
       confirmPassword: validationService.validateRepeatedPassword(
@@ -48,7 +59,17 @@ export const FormRegister = () => {
       ),
     }
     setErrors(errors)
+
+    // const keys = Object.keys(errors)
+    const values = Object.values(errors)
+    const isValid = values.every((value) => value === '')
+    // const entries = Object.entries(errors)
+    if (isValid) {
+      dispatch(register({ username, email, password }))
+    }
   }
+  const errorsValues = error ? Object.values(error).flat() : ''
+  console.log(errorsValues)
 
   return (
     <section style={{ background: theme.background }} className={cls.login}>
@@ -57,8 +78,8 @@ export const FormRegister = () => {
           <h2>
             <NavLink to='/login' exact>
               Login
-            </NavLink>
-            |
+            </NavLink>{' '}
+            |{' '}
             <NavLink
               style={{ color: theme.text }}
               to='/registration'
@@ -99,12 +120,15 @@ export const FormRegister = () => {
             error={errors.confirmPassword}
           />
           <div className={cls.btnLogin}>
-            <Button onClick={onClick} text={'Login'} />
+            <p>{errorsValues}</p>
+            <Button onClick={onClick} text={'Registration'} />
           </div>
         </div>
         <div className={cls.resetPassword}>
           <p style={{ color: theme.greyText }}>If you have account, you can </p>
-          <NavLink to='/login' style={{ color: theme.text }}>Login</NavLink>
+          <NavLink to='/login' style={{ color: theme.text }}>
+            Login
+          </NavLink>
         </div>
         <div className={cls.backImg}>
           <img src={theme.bgImage} alt='img' />
